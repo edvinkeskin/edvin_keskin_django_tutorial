@@ -27,11 +27,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL = 'organization.Employee'
 
 # Application definition
 
 INSTALLED_APPS = [
     "polls.apps.PollsConfig",
+    "organization.apps.OrganizationConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
