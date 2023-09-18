@@ -27,8 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-AUTH_USER_MODEL = 'organization.Employee'
-
 # Application definition
 
 INSTALLED_APPS = [
