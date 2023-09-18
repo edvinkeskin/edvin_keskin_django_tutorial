@@ -4,9 +4,6 @@ from django.db import models
 
 class Employee(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-#    first_name = models.CharField(max_length=200)
-#    last_name = models.CharField(max_length=200)
-#    email = models.EmailField(unique=True)
     address = models.CharField(max_length=200, default="123 Road")
     city = models.CharField(max_length=200, default="Vancouver")
     province = models.CharField(max_length=200, default="BC")
@@ -14,15 +11,8 @@ class Employee(models.Model):
     country = models.CharField(max_length=200, default="Canada")
     phone_no = models.CharField(max_length=200, default="6045254590")
 
-    def save(self, *args, **kwargs):
-        if not self.user.first_name:
-            self.user.first_name = "DefaultFirstName"
-        if not self.user.last_name:
-            self.user.last_name = "DefaultLastName"
-        super(Employee, self).save(*args, **kwargs)
-
     def __str__(self):
-        return self.first_name
+        return self.user.username
 
 
 class Office(models.Model):
