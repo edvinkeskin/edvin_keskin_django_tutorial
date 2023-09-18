@@ -4,22 +4,46 @@ from django.db import models
 
 class Employee(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    first_name = models.CharField(max_length=200)
-    last_name = models.CharField(max_length=200)
-    email = models.EmailField(unique=True)
+#    first_name = models.CharField(max_length=200)
+#    last_name = models.CharField(max_length=200)
+#    email = models.EmailField(unique=True)
+    address = models.CharField(max_length=200, default="123 Road")
+    city = models.CharField(max_length=200, default="Vancouver")
+    province = models.CharField(max_length=200, default="BC")
+    postal_code = models.CharField(max_length=200, default="V6T1Z1")
+    country = models.CharField(max_length=200, default="Canada")
+    phone_no = models.CharField(max_length=200, default="6045254590")
 
+    def save(self, *args, **kwargs):
+        if not self.user.first_name:
+            self.user.first_name = "DefaultFirstName"
+        if not self.user.last_name:
+            self.user.last_name = "DefaultLastName"
+        super(Employee, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.first_name
 
 
 class Office(models.Model):
-    number_of_employees = models.IntegerField(default=0)
+    name = models.CharField(max_length=200, default="office a")
+    address = models.CharField(max_length=200, default="123 Road")
+    city = models.CharField(max_length=200, default="Vancouver")
+    province = models.CharField(max_length=200, default="BC")
+    postal_code = models.CharField(max_length=200, default="V6T1Z1")
+    country = models.CharField(max_length=200, default="Canada")
+    phone_no = models.CharField(max_length=200, default="6045254590")
+    employees = models.ManyToManyField(Employee)
 
 
 class Organization(models.Model):
     name = models.CharField(max_length=200)
-    address = models.CharField(max_length=200)
+    address = models.CharField(max_length=200, default="123 Road")
+    city = models.CharField(max_length=200, default="Vancouver")
+    province = models.CharField(max_length=200, default="BC")
+    postal_code = models.CharField(max_length=200, default="V6T1Z1")
+    country = models.CharField(max_length=200, default="Canada")
+    phone_no = models.CharField(max_length=200, default="6045254590")
     offices = models.ManyToManyField(Office)
 
     def __str__(self):
