@@ -20,11 +20,11 @@ class Office(models.Model):
 class Organization(models.Model):
     name = models.CharField(max_length=200)
     address = models.CharField(max_length=200)
-    offices = models.ForeignKey(Office, on_delete=models.CASCADE)
+    offices = models.ManyToManyField(Office)
 
     def __str__(self):
         return self.name
 
 
 class Customer(models.Model):
-    organizations = models.ForeignKey(Organization, on_delete=models.CASCADE)
+    organizations = models.ManyToManyField(Organization)
